@@ -1,0 +1,87 @@
+{
+  "services": {
+    "basic": [
+      "Landing Page de Conversão",
+      "Design para Redes Sociais",
+      "Edição de Vídeos Curtos",
+      "Criativos para Anúncios"
+    ],
+    "intermediate": [
+      "Identidade Visual Essencial",
+      "Social Media + Conteúdo",
+      "Website Institucional",
+      "UX/UI Design"
+    ],
+    "advanced": [
+      "Branding Completo",
+      "Direção Criativa",
+      "Produção de Conteúdo Profissional",
+      "Otimização de Conversão (CRO)"
+    ],
+    "premium": [
+      "Estratégia Digital Completa",
+      "Design de Serviços",
+      "Web Apps / MVP",
+      "Consultoria Estratégica Contínua"
+    ]
+  },
+  "packages": [
+    {
+      "name": "Start",
+      "includes": [
+        "Landing Page",
+        "6 posts",
+        "1 vídeo curto"
+      ]
+    },
+    {
+      "name": "Presença Digital",
+      "includes": [
+        "Landing Page ou site simples",
+        "12 posts",
+        "2-4 vídeos",
+        "Identidade visual essencial"
+      ]
+    },
+    {
+      "name": "Crescimento",
+      "includes": [
+        "Website institucional",
+        "Social media mensal",
+        "4-8 vídeos",
+        "Criativos para anúncios",
+        "Direção criativa básica"
+      ]
+    },
+    {
+      "name": "Performance",
+      "includes": [
+        "Landing pages estratégicas",
+        "Criativos contínuos",
+        "Produção de conteúdo",
+        "Otimização de conversão",
+        "Acompanhamento mensal"
+      ]
+    },
+    {
+      "name": "Brand & Scale",
+      "includes": [
+        "Branding completo",
+        "Website completo",
+        "Estratégia digital",
+        "Direção criativa",
+        "Conteúdo contínuo"
+      ]
+    },
+    {
+      "name": "Parceria Estratégica",
+      "includes": [
+        "Consultoria estratégica",
+        "Conteúdo mensal completo",
+        "Criativos e campanhas",
+        "Otimizações contínuas",
+        "Suporte contínuo"
+      ]
+    }
+  ]
+}

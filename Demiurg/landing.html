@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demiurg Studio — Design, Marketing e Estratégia Digital</title>
+    <meta name="description" content="Design editorial minimalista. Landing pages, identidade visual, social media e estratégia digital. Design que não envelhece.">
+    <link rel="icon" type="image/svg+xml" href="logos/demiurg svg (3).svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:       #EFEFED;
+            --surface:  #E8E8E6;
+            --border:   #D8D8D5;
+            --dark:     #1E1E1E;
+            --dark-2:   #2A2A2A;
+            --accent:   #FF5C1A;
+            --accent-h: #E04A0A;
+            --text:     #1E1E1E;
+            --text-2:   #555552;
+            --text-3:   #8A8A87;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+              -45deg,
+              transparent,
+              transparent 48px,
+              rgba(30,30,30,0.035) 48px,
+              rgba(30,30,30,0.035) 49px
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        section, nav, footer, .numbers { position: relative; z-index: 1; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 48px;
+            background: rgba(239,239,237,0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+        .nav-links a {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--bg);
+            background: var(--dark);
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: background 180ms ease;
+        }
+        .nav-links a:hover { background: var(--dark-2); }
+        .nav-links a.cta { background: var(--accent); }
+        .nav-links a.cta:hover { background: var(--accent-h); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 48px 112px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 30, 0.5);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 860px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 24px;
+        }
+
+        .hero-label {
+            display: none;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--bg);
+            max-width: 860px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.2s;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--surface);
+            max-width: 580px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.35s;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.5s;
+        }
+
+        .btn-primary {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
+            transition: background 180ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary:hover { background: var(--accent-h); }
+
+        .btn-secondary {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            background: var(--dark);
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
+            transition: background 180ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-secondary:hover { background: var(--dark-2); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--bg);
+            border: 1.5px solid var(--border);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border-radius: 8px;
+            padding: 12px 27px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: border-color 180ms ease;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--bg);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards 0.8s;
+        }
+        .scroll-hint span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.625rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, var(--border), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* ── MARQUEE ── */
+        .marquee-wrap {
+            background: var(--dark);
+            padding: 18px 0;
+            overflow: hidden;
+            border-top: 1px solid var(--dark-2);
+            border-bottom: 1px solid var(--dark-2);
+        }
+        .marquee-track {
+            display: flex;
+            gap: 0;
+            animation: marquee 40s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            padding: 0 40px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            transition: color 200ms ease;
+        }
+        .marquee-item span { color: var(--accent); }
+        .marquee-item:hover { color: var(--accent); }
+        .marquee-item:hover span { color: var(--bg); }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── MARQUEE 2 ── */
+        .marquee2-wrap {
+            background: var(--dark);
+            padding: 24px 0;
+            overflow: hidden;
+            border-top: 1px solid var(--dark-2);
+            border-bottom: 1px solid var(--dark-2);
+        }
+        .marquee2-wrap:hover .marquee2-track {
+            animation-play-state: paused;
+        }
+        .marquee2-track {
+            display: flex;
+            gap: 0;
+            animation: marquee2 35s linear infinite;
+            width: max-content;
+        }
+        .marquee2-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            padding: 0 48px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            transition: color 200ms ease, transform 200ms ease;
+        }
+        .marquee2-item span { color: var(--accent); }
+        .marquee2-item:hover { color: var(--accent); transform: scale(1.05); }
+        .marquee2-item:hover span { color: var(--bg); }
+        @keyframes marquee2 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── NÚMEROS ── */
+        .numbers {
+            background: var(--dark);
+            padding: 96px 48px;
+        }
+        .numbers-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .number-item {
+            padding: 24px 32px;
+            border-right: 1px solid #2A2A2A;
+            text-align: center;
+        }
+        .number-item:last-child { border-right: none; }
+        .number-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .number-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8125rem;
+            color: #8A8A87;
+            line-height: 1.5;
+        }
+
+        /* ── SECTION BASE ── */
+        .section-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 144px 48px;
+        }
+
+        .section-wrap.no-top-padding {
+            padding-top: 112px;
+        }
+
+        .section-header { margin-bottom: 64px; }
+
+        .section-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.6875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            max-width: 640px;
+        }
+        .section-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        /* ── SERVIÇOS ── */
+        .tiers { display: flex; flex-direction: column; gap: 56px; }
+
+        .tier-group {}
+        .tier-label-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .tier-pill {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.6875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            color: var(--text-3);
+        }
+        .tier-pill.t1 { border-color: var(--border); }
+        .tier-pill.t2 { border-color: var(--dark); color: var(--dark); }
+        .tier-pill.t3 { border-color: var(--accent); color: var(--accent); }
+        .tier-pill.t4 { background: var(--dark); color: var(--bg); border-color: var(--dark); }
+
+        .tier-divider { flex: 1; height: 1px; background: var(--border); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 64px;
+        }
+
+        .service-card {
+            background: var(--surface);
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: background 250ms;
+        }
+        .service-card:first-child { border-radius: 12px 0 0 12px; }
+        .service-card:last-child { border-radius: 0 12px 12px 0; }
+        .service-card:hover { background: #E2E2DF; }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 350ms ease;
+        }
+        .service-card:hover::after { width: 100%; }
+
+        .service-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .service-icon-wrap {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        .service-icon-wrap svg { width: 40px; height: 40px; stroke: currentColor; }
+
+        .service-card-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: var(--text-2);
+            margin-bottom: 24px;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 28px;
+        }
+        .tag {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 3px;
+            background: var(--bg);
+            color: var(--text-3);
+            border: 0.5px solid var(--border);
+        }
+
+        .service-link {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--dark);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1.5px solid var(--dark);
+            padding-bottom: 2px;
+            transition: color 200ms, border-color 200ms;
+        }
+        .service-link:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* Bg number */
+        .service-bg-num {
+            position: absolute;
+            bottom: -16px;
+            right: -8px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 700;
+            font-size: 7rem;
+            line-height: 1;
+            color: rgba(30, 30, 30, 0.04);
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: -0.04em;
+        }
+
+        /* ── PACOTES ── */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 64px;
+        }
+
+        .pkg {
+            background: var(--dark-2);
+            border-radius: 10px;
+            padding: 36px 32px;
+            border: 0.5px solid #333;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 250ms, transform 250ms;
+        }
+        .pkg:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .pkg.featured {
+            background: var(--bg);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+        .pkg.featured:hover { transform: scale(1.02) translateY(-4px); }
+
+        .pkg-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .pkg-tier {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .pkg.featured .pkg-tier { color: var(--text-3); }
+
+        .pkg-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.625rem;
+            letter-spacing: -0.02em;
+            color: var(--bg);
+            margin-bottom: 8px;
+        }
+        .pkg.featured .pkg-name { color: var(--dark); }
+
+        .pkg-ideal {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: #888;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .pkg.featured .pkg-ideal { color: var(--text-2); }
+
+        .pkg-divider {
+            height: 1px;
+            background: #333;
+            margin-bottom: 20px;
+        }
+        .pkg.featured .pkg-divider { background: var(--border); }
+
+        .pkg-items {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .pkg-items li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: #888;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        .pkg.featured .pkg-items li { color: var(--text-2); }
+        .pkg-items li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #444;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+        .pkg.featured .pkg-items li::before { background: var(--accent); }
+
+        .pkg-cta {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background: var(--dark);
+            color: var(--bg);
+            border: 1px solid #333;
+            transition: background 200ms, border-color 200ms;
+        }
+        .pkg-cta:hover { background: #111; border-color: #444; }
+        .pkg.featured .pkg-cta { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+        .pkg.featured .pkg-cta:hover { background: var(--accent-h); border-color: var(--accent-h); }
+
+        /* ── PROCESSO ── */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            gap: 1px;
+        }
+
+        .step {
+            background: var(--surface);
+            padding: 36px 28px;
+        }
+
+        .step-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.0625rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+
+        /* ── DEPOIMENTOS ── */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .testimonial {
+            background: var(--surface);
+            border: 0.5px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+        .star { width: 14px; height: 14px; color: var(--accent); }
+
+        .testimonial-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9375rem;
+            color: var(--text-2);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .testimonial-text strong { color: var(--accent); font-weight: 500; font-style: normal; }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .author-avatar {
+            width: 38px; height: 38px;
+            border-radius: 9999px;
+            background: var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--dark);
+            flex-shrink: 0;
+        }
+        .author-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            color: var(--dark);
+        }
+        .author-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-3);
+        }
+
+        /* ── RESULTADOS ── */
+        #resultados {
+            background: var(--dark);
+            padding: 128px 48px;
+        }
+        #resultados .section-wrap {
+            padding: 0;
+            max-width: 1200px;
+        }
+        #resultados .section-label {
+            color: #555552;
+        }
+        #resultados .section-title {
+            color: var(--bg);
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .result-card {
+            background: var(--dark-2);
+            border: 0.5px solid #2A2A2A;
+            border-radius: 16px;
+            padding: 32px 28px;
+        }
+        .result-metric {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 2.75rem;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .result-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.9375rem;
+            color: var(--bg);
+            margin-bottom: 8px;
+        }
+        .result-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8125rem;
+            color: #8A8A87;
+            line-height: 1.6;
+        }
+        .result-tag {
+            display: inline-block;
+            margin-top: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(255, 92, 26, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(255, 92, 26, 0.3);
+        }
+
+        /* ── CTA FINAL ── */
+        .cta-section {
+            background: var(--dark);
+            padding: 128px 48px;
+            text-align: center;
+        }
+        .cta-inner { max-width: 680px; margin: 0 auto; }
+
+        .cta-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #555552;
+            margin-bottom: 24px;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            color: var(--bg);
+            margin-bottom: 20px;
+        }
+        .cta-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .cta-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #8A8A87;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 48px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .footer-links { display: flex; gap: 24px; list-style: none; }
+        .footer-links a {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8125rem;
+            color: var(--text-3);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50%       { opacity: 1;   transform: scaleY(1.2); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .hero { padding: 120px 24px 96px; }
+            .section-wrap { padding: 96px 24px; }
+            .section-wrap.no-top-padding { padding-top: 72px; }
+            .numbers { padding: 72px 24px; }
+            .numbers-inner { grid-template-columns: repeat(2, 1fr); }
+            .number-item:nth-child(2) { border-right: none; }
+            .number-item:nth-child(3) { border-right: 1px solid #2A2A2A; border-top: 1px solid #2A2A2A; }
+            .number-item:nth-child(4) { border-top: 1px solid #2A2A2A; border-right: none; }
+            #resultados { padding: 96px 24px; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+            .packages-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .service-card:first-child, .service-card:last-child { border-radius: 0; }
+            .cta-section { padding: 96px 24px; }
+            footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 600px) {
+            .numbers-inner { grid-template-columns: 1fr; }
+            .number-item { border-right: none !important; border-top: 1px solid #2A2A2A; }
+            .number-item:first-child { border-top: none; }
+            .process-steps { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="logos/demiurg svg (2).svg" alt="Demiurg Studio" style="height: 40px; width: auto;">
+  <ul class="nav-links">
+    <li><a href="#o-que-entregamos">O que entregamos</a></li>
+    <li><a href="#pacotes">Pacotes</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#como-trabalhamos">Como trabalhamos</a></li>
+    <li><a href="mailto:contato@demiurg.studio?subject=Quero%20solicitar%20uma%20proposta" class="cta">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay loop muted playsinline>
+    <source src="https://videos.pexels.com/video-files/18069232/18069232-uhd_2560_1440_24fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="logos/demiurg svg (3).svg" alt="Demiurg Studio" class="hero-logo">
+    <h1>Seu projeto existe.<br/>Falta tomar <em>forma</em>.</h1>
+    <p class="hero-sub">
+      Branding, web, conteúdo e estratégia — construídos com a precisão de quem sabe que forma não é estética. É intenção.
+    </p>
+    <div class="hero-ctas">
+      <a href="mailto:contato@demiurg.studio?subject=Quero%20solicitar%20uma%20proposta" class="btn-primary">
+        Solicitar proposta
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+      <a href="#pacotes" class="btn-ghost">Ver pacotes</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Landing Page de Conversão <span>·</span></div>
+    <div class="marquee-item">Design para Redes Sociais <span>·</span></div>
+    <div class="marquee-item">Edição de Vídeos Curtos <span>·</span></div>
+    <div class="marquee-item">Criativos para Anúncios <span>·</span></div>
+    <div class="marquee-item">Identidade Visual Essencial <span>·</span></div>
+    <div class="marquee-item">Social Media + Conteúdo <span>·</span></div>
+    <div class="marquee-item">Website Institucional <span>·</span></div>
+    <div class="marquee-item">UX/UI Design <span>·</span></div>
+    <div class="marquee-item">Branding Completo <span>·</span></div>
+    <div class="marquee-item">Direção Criativa <span>·</span></div>
+    <div class="marquee-item">Produção de Conteúdo Profissional <span>·</span></div>
+    <div class="marquee-item">Otimização de Conversão (CRO) <span>·</span></div>
+    <div class="marquee-item">Estratégia Digital Completa <span>·</span></div>
+    <div class="marquee-item">Design de Serviços <span>·</span></div>
+    <div class="marquee-item">Web Apps / MVP <span>·</span></div>
+    <div class="marquee-item">Consultoria Estratégica Contínua <span>·</span></div>
+    <div class="marquee-item">Landing Page de Conversão <span>·</span></div>
+    <div class="marquee-item">Design para Redes Sociais <span>·</span></div>
+    <div class="marquee-item">Edição de Vídeos Curtos <span>·</span></div>
+    <div class="marquee-item">Criativos para Anúncios <span>·</span></div>
+    <div class="marquee-item">Identidade Visual Essencial <span>·</span></div>
+    <div class="marquee-item">Social Media + Conteúdo <span>·</span></div>
+    <div class="marquee-item">Website Institucional <span>·</span></div>
+    <div class="marquee-item">UX/UI Design <span>·</span></div>
+    <div class="marquee-item">Branding Completo <span>·</span></div>
+    <div class="marquee-item">Direção Criativa <span>·</span></div>
+    <div class="marquee-item">Produção de Conteúdo Profissional <span>·</span></div>
+    <div class="marquee-item">Otimização de Conversão (CRO) <span>·</span></div>
+    <div class="marquee-item">Estratégia Digital Completa <span>·</span></div>
+    <div class="marquee-item">Design de Serviços <span>·</span></div>
+    <div class="marquee-item">Web Apps / MVP <span>·</span></div>
+    <div class="marquee-item">Consultoria Estratégica Contínua <span>·</span></div>
+  </div>
+</div>
+
+<!-- O QUE ENTREGAMOS -->
+<section id="o-que-entregamos">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="section-label">O que entregamos</p>
+      <h2 class="section-title">Serviços pensados para cada fase do seu negócio.</h2>
+    </div>
+
+    <div class="tiers">
+
+      <!-- TIER 1 -->
+      <div class="tier-group reveal">
+        <div class="tier-label-row">
+          <span class="tier-pill t1">Básico — execução pontual</span>
+          <div class="tier-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-bg-num">01</div>
+            <p class="service-num">01 — Web</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="32" height="22" rx="3"/><path d="M14 34h12M20 30v4"/><path d="M10 16h4M10 21h12"/><rect x="22" y="14" width="10" height="12" rx="2"/></svg>
+            </div>
+            <h3 class="service-card-name">Landing Page de<br/>Conversão</h3>
+            <p class="service-card-desc">Página focada em uma única ação — geração de leads, venda ou cadastro.</p>
+            <div class="service-tags"><span class="tag">HTML/CSS</span><span class="tag">CRO</span><span class="tag">Responsivo</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Landing%20Page" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">02</div>
+            <p class="service-num">02 — Social</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="32" height="28" rx="3"/><path d="M12 14h6M12 20h16M12 26h10"/><circle cx="28" cy="14" r="3"/></svg>
+            </div>
+            <h3 class="service-card-name">Design para<br/>Redes Sociais</h3>
+            <p class="service-card-desc">Posts, stories e capas criadas com identidade visual consistente.</p>
+            <div class="service-tags"><span class="tag">Figma</span><span class="tag">Feed</span><span class="tag">Stories</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Social%20Media" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">03</div>
+            <p class="service-num">03 — Vídeo</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="26" height="20" rx="3"/><path d="M28 16l10-6v20l-10-6V16Z"/></svg>
+            </div>
+            <h3 class="service-card-name">Edição de<br/>Vídeos Curtos</h3>
+            <p class="service-card-desc">Reels, shorts e cortes para social media com ritmo e legenda.</p>
+            <div class="service-tags"><span class="tag">Reels</span><span class="tag">Shorts</span><span class="tag">Legenda</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Vídeo" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">04</div>
+            <p class="service-num">04 — Ads</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34L14 22L22 27L32 8"/><circle cx="32" cy="8" r="3"/><circle cx="14" cy="22" r="3"/></svg>
+            </div>
+            <h3 class="service-card-name">Criativos para<br/>Anúncios</h3>
+            <p class="service-card-desc">Peças visuais para campanhas pagas no Meta, Google e TikTok.</p>
+            <div class="service-tags"><span class="tag">Meta Ads</span><span class="tag">Google</span><span class="tag">TikTok</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Criativos" class="service-link">Solicitar proposta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 2 -->
+      <div class="tier-group reveal">
+        <div class="tier-label-row">
+          <span class="tier-pill t2">Intermediário — projetos estruturados</span>
+          <div class="tier-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-bg-num">05</div>
+            <p class="service-num">05 — Brand</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="16"/><path d="M13 20 Q20 12 27 20 Q20 28 13 20Z"/><circle cx="20" cy="20" r="3"/></svg>
+            </div>
+            <h3 class="service-card-name">Identidade Visual<br/>Essencial</h3>
+            <p class="service-card-desc">Logo, paleta de cores, tipografia e guia de uso básico.</p>
+            <div class="service-tags"><span class="tag">Logo</span><span class="tag">Paleta</span><span class="tag">Guia</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Identidade%20Visual" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">06</div>
+            <p class="service-num">06 — Social</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3 class="service-card-name">Social Media +<br/>Conteúdo</h3>
+            <p class="service-card-desc">Gestão mensal de perfis com calendário editorial e produção de peças.</p>
+            <div class="service-tags"><span class="tag">Calendário</span><span class="tag">Gestão</span><span class="tag">Mensal</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Social%20Media" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">07</div>
+            <p class="service-num">07 — Web</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="32" height="22" rx="3"/><path d="M14 34h12M20 30v4"/><path d="M10 16h4M10 21h12"/><rect x="22" y="14" width="10" height="12" rx="2"/></svg>
+            </div>
+            <h3 class="service-card-name">Website<br/>Institucional</h3>
+            <p class="service-card-desc">Site com até 5 páginas, responsivo, rápido e otimizado para busca.</p>
+            <div class="service-tags"><span class="tag">5 páginas</span><span class="tag">Responsivo</span><span class="tag">SEO</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Website" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">08</div>
+            <p class="service-num">08 — UX/UI</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="32" height="32" rx="4"/><circle cx="14" cy="14" r="4"/><circle cx="26" cy="14" r="4"/><path d="M10 26 Q20 32 30 26"/></svg>
+            </div>
+            <h3 class="service-card-name">UX/UI<br/>Design</h3>
+            <p class="service-card-desc">Wireframes, protótipos interativos e interfaces centradas no usuário.</p>
+            <div class="service-tags"><span class="tag">Figma</span><span class="tag">Wireframe</span><span class="tag">Protótipo</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20UX/UI" class="service-link">Solicitar proposta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 3 -->
+      <div class="tier-group reveal">
+        <div class="tier-label-row">
+          <span class="tier-pill t3">Avançado — impacto em resultado</span>
+          <div class="tier-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-bg-num">09</div>
+            <p class="service-num">09 — Brand</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h3 class="service-card-name">Branding<br/>Completo</h3>
+            <p class="service-card-desc">Marca, voz da marca, posicionamento e brand book completo.</p>
+            <div class="service-tags"><span class="tag">Brand book</span><span class="tag">Voz</span><span class="tag">Tom</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Branding" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">10</div>
+            <p class="service-num">10 — Creative</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3 class="service-card-name">Direção<br/>Criativa</h3>
+            <p class="service-card-desc">Conceito visual, linha editorial e coordenação de toda produção.</p>
+            <div class="service-tags"><span class="tag">Conceito</span><span class="tag">Editorial</span><span class="tag">Coord.</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Direção%20Criativa" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">11</div>
+            <p class="service-num">11 — Conteúdo</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </div>
+            <h3 class="service-card-name">Produção de<br/>Conteúdo Profissional</h3>
+            <p class="service-card-desc">Foto, vídeo e texto com padrão editorial elevado e consistência de marca.</p>
+            <div class="service-tags"><span class="tag">Foto</span><span class="tag">Vídeo</span><span class="tag">Editorial</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Conteúdo" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">12</div>
+            <p class="service-num">12 — CRO</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 class="service-card-name">Otimização de<br/>Conversão (CRO)</h3>
+            <p class="service-card-desc">Testes A/B, mapa de calor e melhorias contínuas em funis e páginas.</p>
+            <div class="service-tags"><span class="tag">A/B Test</span><span class="tag">Heatmap</span><span class="tag">Funil</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20CRO" class="service-link">Solicitar proposta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 4 -->
+      <div class="tier-group reveal">
+        <div class="tier-label-row">
+          <span class="tier-pill t4">Premium — parceria contínua</span>
+          <div class="tier-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-bg-num">13</div>
+            <p class="service-num">13 — Estratégia</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <h3 class="service-card-name">Estratégia Digital<br/>Completa</h3>
+            <p class="service-card-desc">Diagnóstico, planejamento e roadmap de crescimento de 12 meses.</p>
+            <div class="service-tags"><span class="tag">Diagnóstico</span><span class="tag">Roadmap</span><span class="tag">OKRs</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Estratégia" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">14</div>
+            <p class="service-num">14 — Service</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3 class="service-card-name">Design de<br/>Serviços</h3>
+            <p class="service-card-desc">Mapeamento de jornada do cliente e otimização da experiência completa.</p>
+            <div class="service-tags"><span class="tag">Jornada</span><span class="tag">CX</span><span class="tag">Blueprinting</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Design%20de%20Serviços" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">15</div>
+            <p class="service-num">15 — Dev</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="service-card-name">Web Apps /<br/>MVP</h3>
+            <p class="service-card-desc">Desenvolvimento de produto digital mínimo viável com tecnologias modernas.</p>
+            <div class="service-tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">MVP</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Web%20Apps" class="service-link">Solicitar proposta →</a>
+          </div>
+          <div class="service-card">
+            <div class="service-bg-num">16</div>
+            <p class="service-num">16 — Consultoria</p>
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="service-card-name">Consultoria Estratégica<br/>Contínua</h3>
+            <p class="service-card-desc">Acompanhamento mensal com definição de OKRs e tomada de decisão orientada a dados.</p>
+            <div class="service-tags"><span class="tag">Mensal</span><span class="tag">OKRs</span><span class="tag">Dados</span></div>
+            <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20em%20Consultoria" class="service-link">Solicitar proposta →</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tiers -->
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <p class="section-label">Números que importam</p>
+      <h2 class="section-title">Resultado com <em>evidência.</em></h2>
+    </div>
+    <div class="results-grid">
+      <div class="result-card reveal">
+        <div class="result-metric">+340%</div>
+        <div class="result-title">Tráfego orgânico em 6 meses</div>
+        <div class="result-desc">E-commerce de moda feminina saiu de 1.200 para 5.280 visitas/mês após estratégia de SEO + blog com 18 artigos otimizados.</div>
+        <span class="result-tag">SEO + Blog</span>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-metric">4.1×</div>
+        <div class="result-title">Aumento na taxa de conversão</div>
+        <div class="result-desc">Reformulação de landing page com novo copy e testes A/B elevou conversão de 1.8% para 7.4% em campanha de captação de leads B2B.</div>
+        <span class="result-tag">CRO + Copy</span>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-metric">R$180k</div>
+        <div class="result-title">Faturamento gerado em lançamento</div>
+        <div class="result-desc">Identidade visual + landing page + e-mail marketing resultaram em R$180k em vendas no primeiro mês de produto digital de cliente da área de educação.</div>
+        <span class="result-tag">Branding + E-mail</span>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-metric">-62%</div>
+        <div class="result-title">Queda no custo por lead</div>
+        <div class="result-desc">Novos criativos para Meta Ads com copy estratégico reduziram CPL de R$38 para R$14,40 em campanha de clínica médica.</div>
+        <span class="result-tag">Criativos + Copy</span>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-metric">+28k</div>
+        <div class="result-title">Seguidores orgânicos em 90 dias</div>
+        <div class="result-desc">Estratégia de social media com direção criativa e produção de conteúdo levou perfil do zero a 28 mil seguidores qualificados.</div>
+        <span class="result-tag">Social Media + Vídeo</span>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-metric">52%</div>
+        <div class="result-title">Taxa de abertura de e-mail</div>
+        <div class="result-desc">Automação de boas-vindas com segmentação e copywriting elevou abertura de 18% para 52% e gerou +R$40k em receita recorrente em 3 meses.</div>
+        <span class="result-tag">Automação + Copy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section id="pacotes">
+  <div class="section-wrap no-top-padding">
+    <div class="section-header reveal">
+      <p class="section-label">Pacotes prontos</p>
+      <h2 class="section-title">Escolha o ponto de partida <em>certo</em> para o seu negócio.</h2>
+    </div>
+    <div class="packages-grid">
+
+      <div class="pkg reveal">
+        <span class="pkg-tier">Básico</span>
+        <h3 class="pkg-name">Start</h3>
+        <p class="pkg-ideal">Para quem quer dar o primeiro passo com profissionalismo.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Landing page de conversão</li>
+          <li>6 posts para redes sociais</li>
+          <li>1 vídeo curto editado</li>
+          <li>Copywriting básico da página</li>
+          <li>SEO on-page básico</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Start" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+      <div class="pkg reveal">
+        <span class="pkg-tier">Básico+</span>
+        <h3 class="pkg-name">Presença Digital</h3>
+        <p class="pkg-ideal">Para quem quer marca sólida e presença consistente online.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Landing page ou site simples</li>
+          <li>Identidade visual essencial</li>
+          <li>12 posts mensais</li>
+          <li>2–4 vídeos curtos</li>
+          <li>Copywriting de perfil e bio</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Presença%20Digital" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+      <div class="pkg featured reveal">
+        <div class="pkg-badge">Mais escolhido</div>
+        <span class="pkg-tier">Intermediário</span>
+        <h3 class="pkg-name">Crescimento</h3>
+        <p class="pkg-ideal">Para quem quer profissionalizar o marketing e crescer no digital.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Website institucional completo</li>
+          <li>Social media mensal</li>
+          <li>4–8 vídeos</li>
+          <li>Criativos para anúncios</li>
+          <li>Direção criativa básica</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Crescimento" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+      <div class="pkg reveal">
+        <span class="pkg-tier">Avançado</span>
+        <h3 class="pkg-name">Performance</h3>
+        <p class="pkg-ideal">Para quem tem tráfego e quer converter melhor com design e dados.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Landing pages estratégicas</li>
+          <li>Criativos contínuos</li>
+          <li>Produção de conteúdo</li>
+          <li>Otimização de conversão (CRO)</li>
+          <li>Acompanhamento mensal</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Performance" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+      <div class="pkg reveal">
+        <span class="pkg-tier">Avançado+</span>
+        <h3 class="pkg-name">Brand & Scale</h3>
+        <p class="pkg-ideal">Para marcas que querem construir algo que dura.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Branding completo</li>
+          <li>Website + UI/UX</li>
+          <li>Estratégia digital</li>
+          <li>Direção criativa</li>
+          <li>Conteúdo contínuo</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Brand%20%26%20Scale" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+      <div class="pkg reveal">
+        <span class="pkg-tier">Premium</span>
+        <h3 class="pkg-name">Parceria Estratégica</h3>
+        <p class="pkg-ideal">Para empresas que querem um parceiro criativo de longo prazo.</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Consultoria estratégica contínua</li>
+          <li>Conteúdo mensal completo</li>
+          <li>Criativos e campanhas</li>
+          <li>Web apps / MVP sob demanda</li>
+          <li>Suporte e otimizações</li>
+        </ul>
+        <a href="mailto:contato@demiurg.studio?subject=Tenho%20interesse%20no%20pacote%20Parceria%20Estratégica" class="pkg-cta">Falar sobre este pacote</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<div class="numbers">
+  <div class="numbers-inner">
+    <div class="number-item reveal">
+      <div class="number-val">+80</div>
+      <div class="number-label">projetos entregues<br/>nos últimos 4 anos</div>
+    </div>
+    <div class="number-item reveal">
+      <div class="number-val">3.2×</div>
+      <div class="number-label">mais conversão média<br/>em landing pages</div>
+    </div>
+    <div class="number-item reveal">
+      <div class="number-val">+40%</div>
+      <div class="number-label">crescimento médio<br/>de tráfego orgânico (SEO)</div>
+    </div>
+    <div class="number-item reveal">
+      <div class="number-val">94%</div>
+      <div class="number-label">dos clientes voltam<br/>para um segundo projeto</div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPOIMENTOS -->
+<section>
+  <div class="section-wrap no-top-padding">
+    <div class="section-header reveal">
+      <p class="section-label">Quem já está com a Demiurg</p>
+      <h2 class="section-title">Clientes que cresceram. E <em>voltaram.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">Antes eu tinha site, mas não tinha presença. A Demiurg reorganizou tudo: identidade, conteúdo, e-mail. Em três meses, <strong>triplicamos os leads qualificados</strong> sem aumentar o orçamento de mídia.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CM</div>
+          <div>
+            <div class="author-name">Camila Matos</div>
+            <div class="author-role">CEO, Plataforma EdTech</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">Contratamos o pacote Performance para nosso e-commerce. O trabalho de copy + criativos <strong>reduziu nosso CPL em mais da metade</strong>. O processo é transparente e a entrega é no prazo — sempre.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RN</div>
+          <div>
+            <div class="author-name">Rafael Nunes</div>
+            <div class="author-role">Co-fundador, E-commerce de Moda</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">Fizemos o branding completo com eles e depois migramos para a Parceria Estratégica. A nossa marca ganhou uma consistência que a gente não conseguia sozinha. <strong>Faturamos R$180k no primeiro mês</strong> do nosso novo curso.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PL</div>
+          <div>
+            <div class="author-name">Patricia Leal</div>
+            <div class="author-role">Fundadora, Infoproduto de Saúde</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee2-wrap">
+  <div class="marquee2-track">
+    <div class="marquee2-item">Branding & Identidade Visual <span>·</span></div>
+    <div class="marquee2-item">Web Design & WordPress <span>·</span></div>
+    <div class="marquee2-item">Web Apps & MVP <span>·</span></div>
+    <div class="marquee2-item">UI/UX Design <span>·</span></div>
+    <div class="marquee2-item">Social Media & Conteúdo <span>·</span></div>
+    <div class="marquee2-item">Edição de Vídeo <span>·</span></div>
+    <div class="marquee2-item">Direção Criativa <span>·</span></div>
+    <div class="marquee2-item">Design Estratégico <span>·</span></div>
+    <div class="marquee2-item">Branding & Identidade Visual <span>·</span></div>
+    <div class="marquee2-item">Web Design & WordPress <span>·</span></div>
+    <div class="marquee2-item">Web Apps & MVP <span>·</span></div>
+    <div class="marquee2-item">UI/UX Design <span>·</span></div>
+    <div class="marquee2-item">Social Media & Conteúdo <span>·</span></div>
+    <div class="marquee2-item">Edição de Vídeo <span>·</span></div>
+    <div class="marquee2-item">Direção Criativa <span>·</span></div>
+    <div class="marquee2-item">Design Estratégico <span>·</span></div>
+  </div>
+</div>
+
+<!-- COMO TRABALHAMOS -->
+<section id="como-trabalhamos">
+  <div class="section-wrap no-top-padding">
+    <div class="section-header reveal">
+      <p class="section-label">Como trabalhamos</p>
+      <h2 class="section-title">Processo claro. Entrega <em>previsível.</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01 — Diagnóstico</div>
+        <h4 class="step-title">Entendemos antes de agir</h4>
+        <p class="step-desc">Mapeamos seu negócio, público, concorrência e objetivos antes de abrir qualquer ferramenta. Sem diagnóstico, não há estratégia — só execução no escuro.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02 — Estratégia</div>
+        <h4 class="step-title">Escopo sem surpresa</h4>
+        <p class="step-desc">Definimos entregáveis, prazos e métricas de sucesso em conjunto. Você sabe exatamente o que vai receber e quando. Aprovação antes de qualquer execução.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03 — Execução</div>
+        <h4 class="step-title">Ciclos curtos, visibilidade total</h4>
+        <p class="step-desc">Trabalhamos em sprints quinzenais com entregas parciais e rodadas de feedback estruturadas. Você acompanha cada peça, não fica esperando o resultado final.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04 — Resultado</div>
+        <h4 class="step-title">Dados e continuidade</h4>
+        <p class="step-desc">Entregamos relatório de resultados com métricas acordadas, insights e próximos passos. O projeto termina — a parceria não precisa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <p class="cta-label">Hora de construir</p>
+    <h2 class="cta-title">E a sua ideia, <em>qual é?</em></h2>
+    <p class="cta-sub">Todo grande projeto começou apenas no pensamento. Conte o seu — estamos prontos para torná-lo realidade.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="mailto:contato@demiurg.studio?subject=Quero%20criar%20um%20sistema%20de%20vendas" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.63 6.63l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Falar com a gente
+      </a>
+      <a href="mailto:contato@demiurg.studio?subject=Quero%20solicitar%20uma%20proposta" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Enviar e-mail
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Demiurg Studio</a>
+  <ul class="footer-links">
+    <li><a href="#o-que-entregamos">O que entregamos</a></li>
+    <li><a href="#pacotes">Pacotes</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#como-trabalhamos">Como trabalhamos</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Demiurg Studio — Design, marketing e estratégia digital.</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
