@@ -1,0 +1,32 @@
+{
+  "services": [
+    {
+      "title": "Web & Plataformas Digitais",
+      "description": "Sites, landing pages e plataformas digitais construídas para posicionar sua marca, gerar confiança e transformar visitantes em clientes."
+    },
+    {
+      "title": "Identidade Visual",
+      "description": "Logos e sistemas visuais desenvolvidos para tornar sua marca reconhecível, consistente e memorável em todos os pontos de contato."
+    },
+    {
+      "title": "Marketing Digital",
+      "description": "Estratégias para redes sociais, conteúdo e campanhas digitais que aumentam sua presença, atraem público e fortalecem sua marca online."
+    },
+    {
+      "title": "Estratégia de Marca",
+      "description": "Clareza para posicionar sua marca com propósito, diferenciação e direção estratégica no mercado."
+    },
+    {
+      "title": "Branding & Materiais de Marca",
+      "description": "Representação e construção de marcas e materiais visuais, brand books, manuais para fortalecer percepção, autoridade e consistência em todos os pontos de contato."
+    },
+    {
+      "title": "Experiência do Cliente",
+      "description": "UX/UI, jornadas e experiências digitais pensadas para facilitar interações, melhorar usabilidade e aumentar conexão com sua marca."
+    },
+    {
+      "title": "Produção & Edição de Vídeos",
+      "description": "Vídeos curtos, institucionais e criativos desenvolvidos para gerar atração, retenção e impacto nas redes sociais e campanhas."
+    }
+  ]
+}
